@@ -35,9 +35,7 @@ app.post('/upload', function(req, res){
 
 });
 
-// the server
-http.listen(8080, function(){
-  console.log('listening on *:8080');
-});
+var port_number = http.listen(process.env.PORT || 8080);
+app.listen(port_number);
 
 
