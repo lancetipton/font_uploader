@@ -6,7 +6,7 @@
   		<link rel="stylesheet" href="public/plugins/foundation/foundation.css" />
   		<link rel="stylesheet" href="public/plugins/foundation/normalize.css" />
   		<link rel=stylesheet href="public/styles/common.css">
-  		<link rel=stylesheet href="public/fonts/fonts.css">
+  		<link rel=stylesheet href="public/fonts/fonts.css" data-td-font-css>
 
 		<script src="public/plugins/jquery/jquery.js"></script>
 
@@ -37,11 +37,6 @@
 
 										<div class='font-type-wrapper small-12 medium-6 columns'>
 										    <select class="font-type" data-td-font-type> 
-										        <option value="Comic Sans MS">Comic Sans MS</option>
-										        <option value="Arial">Arial</option>
-										        <option value="Impact">Impact</option>
-										        <option value="Verdana ">Verdana </option>
-										        <option value="Century Gothic">Century Gothic</option>
 										    </select>
 										</div>
 
@@ -57,6 +52,13 @@
 										        <option value="26">26</option>
 										        <option value="30">30</option>
 										        <option value="35">35</option>
+												<option value="40">40</option>
+										        <option value="44">44</option>
+										        <option value="50">50</option>
+										        <option value="55">55</option>
+										        <option value="60">60</option>
+										        <option value="66">66</option>
+										        <option value="70">70</option>
 										    </select>
 									    </div>
 
@@ -81,7 +83,7 @@
 
 										<div class='clear-wrapper small-12 columns'>
 											<div class='clear'>
-												<button class='clear-btn' id='clear' data-td-clearBtn>
+												<button class='clear-btn' id='clear' data-td-clear-btn>
 													Clear
 												</button>
 											</div>
@@ -95,7 +97,7 @@
 					</div>
 
 
-<!-- 					<div class="content row">
+					<div class="content row">
 						<div class="one-column small-12 columns">
 							<div class="main">
 								<div class='upload-wrapper row'>
@@ -108,10 +110,6 @@
 										<input id="upload-input" type="file" name="uploads[]" data-td-real-upload></br>
 									</div>
 
-						            <div class="progress-bar-wrapper">
-						              <div class="progress-bar" role="progressbar" data-td-progress></div>
-						            </div>
-
 						            <div class='upload-btn-wrapper' >
 						            	<button class="uploadBtn" type="button" data-td-upload-btn>
 						            		Upload Font
@@ -121,26 +119,24 @@
 					        </div>
 					    </div>
 					</div>
- -->
+
+					<div class="content row" data-sv-status-wrapper>
+						<div class="one-column small-12 columns">
+							<div class="main">
+								<div class='status-wrapper row'>
+									<div class='status-good' data-td-status-good ></div>
+									<div class='status-bad' data-td-status-bad ></div>
+								</div>
+					        </div>
+					    </div>
+					</div>
+
 				</div>
 			</div>
 		</div>
 		
-
-<!-- 
-		<h1 class='font-upload-test1' >
-			Quicksand-Book
-		</h1>
-
-		<h1 class='font-upload-test2' >
-			Quicksand-Book
-		</h1>
-		<h1 class='font-upload-test3' >
-			Quicksand-Book
-		</h1>
- -->
-
 		<script src="public/js/font_checker.js"></script>
 		<script src="public/js/upload.js"></script>
 	</body>
 </html>
+

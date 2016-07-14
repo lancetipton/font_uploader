@@ -4,9 +4,9 @@ $(document).ready(function(){
 	var text_display = $("[data-td-text-display]");
 	var font_type = $("[data-td-font-type]");
 	var font_size = $("[data-td-font-size]");
-	var clearBtn = $("[data-td-clearBtn]");
+	var clear_btn = $("[data-td-clear-btn]");
 
-	clearBtn.on('click', function(){
+	clear_btn.on('click', function(){
 		text_display.html('');
 		text_input.val('');
 	})
@@ -24,4 +24,9 @@ $(document).ready(function(){
     	text_display.css("font-family", $(this).val());
 	});
 
+
+
+
 })
+
+

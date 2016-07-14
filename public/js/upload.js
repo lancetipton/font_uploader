@@ -1,33 +1,28 @@
 $(document).ready(function(){
 	var uploadBtn = $('[data-td-upload-btn]');
 	var realUploadBtn = $("[data-td-real-upload]");
-	var progressBar = $("[data-td-progress]");
+	var font_type = $("[data-td-font-type]");
+	var font_css = $("[data-td-font-css]");
+	var good_status = $("[data-td-status-good]");
+	var bad_status = $("[data-td-status-bad]");
+	var status_wrapper = $("[data-sv-status-wrapper]");
+	status_wrapper.hide();
 
 	uploadBtn.on('click', function (){
 	    realUploadBtn.click();
-	    progressBar.text('0%');
-	    progressBar.width('0%');
+	    // $(this).prop("disabled", true);
 	});
-
 
 	realUploadBtn.on('change', function(){
 	  var files = $(this).get(0).files;
 
 	  if (files.length > 0){
-	    // One or more files selected, process the file upload
-
-		// create a FormData object which will be sent as the data payload in the
-	    // AJAX request
 	    var formData = new FormData();
-
-	    // loop through all the selected files
 	    for (var i = 0; i < files.length; i++) {
 	      var file = files[i];
-
-	      // add the files to formData object for the data payload
 	      formData.append('uploads[]', file, file.name);
 	    }
-
+	    console.log(formData);
 
 	    $.ajax({
 			url: '/upload',
@@ -36,39 +31,77 @@ $(document).ready(function(){
 			processData: false,
 			contentType: false,
 			success: function(data){
-			  console.log('upload successful!\n' + data);
+				uploadBtn.prop("disabled", false);
+				console.log(data);
+				if(data.error){
+					setStatus('bad', data.status)
+				}
+				else{
+			  		getFonts();
+				}
 			},
-			xhr: function() {
-				// create an XMLHttpRequest
-				var xhr = new XMLHttpRequest();
-
-				// listen to the 'progress' event
-				xhr.upload.addEventListener('progress', function(evt) {
-
-				  if (evt.lengthComputable) {
-				    // calculate the percentage of upload completed
-				    var percentComplete = evt.loaded / evt.total;
-				    percentComplete = parseInt(percentComplete * 100);
-
-				    // update the Bootstrap progress bar with the new percentage
-				    progressBar.text(percentComplete + '%');
-				    progressBar.width(percentComplete + '%');
-
-				    // once the upload reaches 100%, set the progress bar text to done
-				    if (percentComplete === 100) {
-				      progressBar.html('Done');
-				    }
-
-				  }
-
-				}, false);
-
-				return xhr;
+			error: function(err){
+				console.log(err);
 			}
 	    });
 
 	  }
 
 	});
+
+	function getFonts(){
+	    $.ajax({
+			url: '/fonts',
+			type: 'GET',
+			success: function(data){
+				console.log(data);
+				if(data.error){
+					console.log(data);
+					setStatus('bad', data.status);
+				}
+				else{
+					setFonts(data.fonts);
+					setStatus('good', data.status);
+				}
+			},
+			error: function(err){
+				console.log(err);
+				setStatus('bad', err);
+			}
+	    });
+	}
+
+    function setFonts(fonts){
+    	$("[data-td-font-type]").html("");
+    	for(var i = 0; i < fonts.length; i++){
+    		$("[data-td-font-type]").append(
+    			$("<option value='" + fonts[i] + "'>"+ fonts[i] +"</option>")
+    		)
+    	}
+    	var css_loc = font_css.attr('href');
+    	font_css.attr('href', css_loc);
+    }
+
+	getFonts();
+
+
+	function setStatus(type, message){
+		clearStatus();
+
+		if(type === 'good'){
+			good_status.html(message);
+		}
+		else{
+			bad_status.html(message);
+		}
+		setTimeout(clearStatus, 5000);
+	}
+
+	function clearStatus(){
+		status_wrapper.slideToggle();
+		good_status.html("");
+		bad_status.html("");
+	}
+
 
 })
