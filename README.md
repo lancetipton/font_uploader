@@ -12,9 +12,11 @@ https://font-test.herokuapp.com/
 
 
 ### Use:
-Download the repo, run npm install, start the server: $ nodemon server.js (must have node installed)
-Goto http://localhost:8080/, and start typing in some text.
-Upload a font from your computer, and test it out.
-Supported font type: .tff / .woff / .eot
+1. Download the repo, 
+2. Run npm install, 
+3. start the server: $ nodemon server.js (must have node installed) 
+4. Goto http://localhost:8080/, and start typing in some text. 
+5. Upload a font from your computer, and test it out. 
+  1. Supported font type: .tff / .woff / .eot
 
 
