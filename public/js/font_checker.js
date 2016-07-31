@@ -31,10 +31,30 @@ $(document).ready(function(){
 
 	// Helper function to setup sizes, so we don't have to write it in:
 	(function setSize(){
-		for(i = 16; i < 50; i++){
-			font_size.append($('<option value="' + i + '">' + i + '</option> '));
+		for(i = 16; i < 75; i++){
+			if (i % 2 === 0){
+				if(i === 50){
+					font_size.append($('<option value="' + i + '" selected>' + i + '</option> '));
+				}
+				else{
+					font_size.append($('<option value="' + i + '">' + i + '</option> '));
+				}
+			}
 		}
 	})();
+
+    (function() {
+        var link_element = document.createElement("link"),
+            s = document.getElementsByTagName("script")[0];
+        if (window.location.protocol !== "http:" && window.location.protocol !== "https:") {
+            link_element.href = "http:";
+        }
+        link_element.href += "//fonts.googleapis.com/css?family=Titillium+Web:200italic,200,300italic,300,400italic,400,600italic,600,700italic,700,900";
+        link_element.rel = "stylesheet";
+        link_element.type = "text/css";
+        s.parentNode.insertBefore(link_element, s);
+    })();
+
 
 
 })

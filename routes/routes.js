@@ -6,6 +6,10 @@ module.exports = function(app, font_actions, __dirname) {
 	  res.sendFile(__dirname + '/views/index.html');
 	});
 
+	app.get('/upload', function(req, res){
+	  res.sendFile(__dirname + '/views/upload.html');
+	});
+
 	// Route to get all the fonts loaded on the server:
 	app.get('/fonts', function(req, res){
 		// Set the headers to use json:

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="public/plugins/font-awesome/css/font-awesome.min.css">
+  		<link rel="stylesheet" href="public/plugins/foundation/foundation.css" />
+  		<link rel="stylesheet" href="public/plugins/foundation/normalize.css" />
+  		<link rel=stylesheet href="public/styles/common.css">
+  		<link rel=stylesheet href="public/fonts/fonts.css" data-td-font-css>
+
+		<script src="public/plugins/jquery/jquery.js"></script>
+
+	</head>
+	<body class="home">
+		<div class="body-wrapper">
+
+			<!-- Content Section -->
+			<div class="content-section">
+				<div class="content-wrapper">
+
+					<div class="content row">
+						<div class="one-column small-12 columns">
+							<div class="main">
+								<div class='upload-wrapper row'>
+									<div class='header '>
+										<h4 class='title' >
+						            		Font Uploader
+										</h4>
+									</div>
+									<div class='file-wrapper'>
+										<input id="upload-input" type="file" name="uploads[]" data-td-real-upload></br>
+									</div>
+
+						            <div class='upload-btn-wrapper' >
+						            	<button class="uploadBtn" type="button" data-td-upload-btn>
+						            		Upload Font
+						            	</button>
+						            </div>
+								</div>
+					        </div>
+					    </div>
+					</div>
+
+					<div class="content row" data-sv-status-wrapper>
+						<div class="one-column small-12 columns">
+							<div class="main">
+								<div class='status-wrapper row'>
+									<div class='status-good' data-td-status-good ></div>
+									<div class='status-bad' data-td-status-bad ></div>
+								</div>
+					        </div>
+					    </div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		
+		<script src="public/js/font_checker.js"></script>
+		<script src="public/js/upload.js"></script>
+	</body>
+</html>
+

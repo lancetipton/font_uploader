@@ -1,3 +1,31 @@
+
+@font-face {
+    font-family: 'futura-pt';
+    src: url('/public/fonts/futura-book.ttf');
+}
+
+@font-face {
+    font-family: 'prox-nova';
+    src: url('/public/fonts/prox-nova.otf');
+}
+@font-face {
+    font-family: 'prox-nova-black';
+    src: url('/public/fonts/prox-nova-black.otf');
+}
+
+@font-face {
+    font-family: 'prox-nova-alt-bold';
+    src: url('/public/fonts/prox-nova-alt-bold.otf');
+}
+
+h1,h2,h3,h4,h5,h6{
+	 font-family: "Titillium Web";
+	 font-weight: 600;
+	 font-style: normal;
+	 font-size: 28px;
+	 line-height: 28px;
+	}
+
 .content-section{}
 .content-section .content-wrapper{}
 .content-section .content-wrapper .content{}
@@ -5,13 +33,10 @@
 
 .main {
 	margin: 20px;
+    font-family: "proxima-nova";
 }
 .content-section .content-wrapper .content .one-column .main > div{
-	margin-bottom: 20px;
     padding: 20px;
-    background-color: #FCE8B0;
-    border: 2px solid #581845;
-    border-radius: 5px;
 }
 
 .content-section .content-wrapper .content .one-column .main .main-header{
@@ -21,7 +46,6 @@
     background-color: transparent;
     border: none;
     border-bottom: 2px solid #581845;
-    border-radius: 0px;
     text-align: center;	
 }
 .content-section .content-wrapper .content .one-column .main .main-header h2{
@@ -29,17 +53,21 @@
 }
 
 .content-section .content-wrapper .content .one-column .main h4{
-	margin-bottom: 15spx;
+    color: #d6d6d6;
+	border-bottom: 1px solid #00a89d;
+    padding-bottom: 5px;
 }
 
 .text-settings-wrapper{
 
 }
 .text-settings-wrapper .text-settings{}
-.text-settings-wrapper .text-settings .header {}
-.text-settings-wrapper .text-settings .header .title{}
+.text-settings-wrapper .text-settings .header {
+    margin-bottom: 10px;
+}
+.text-settings-wrapper .text-settings .header .title{
+}
 .text-settings-wrapper .text-settings select{
-	border-radius: 5px;
 }
 .text-settings-wrapper .text-settings .font-type-wrapper{}
 .text-settings-wrapper .text-settings .font-type-wrapper .font-type{}
@@ -47,12 +75,13 @@
 .text-settings-wrapper .text-settings .font-size-wrapper .font-size{}
 .text-data-wrapper{}
 .text-data-wrapper .text-data{}
-.text-data-wrapper .text-data .header{}
+.text-data-wrapper .text-data .header{
+    margin-bottom: 10px;
+}
 .text-data-wrapper .text-data .header .title{}
 .text-data-wrapper .text-data .text-input-wrapper{}
 
 .text-data-wrapper .text-data .text-input-wrapper .text-input{
-	border-radius: 5px;
 }
 
 .text-data-wrapper .text-data .text-display-wrapper {
@@ -62,16 +91,29 @@
 }
 .text-data-wrapper .text-data .text-display{
 	min-height: 20px;
-	border-bottom: 1px solid #581845;
+    font-size: 50px;
+	/*border-bottom: 1px solid #581845;*/
 }
 .text-data-wrapper .text-data .clear-wrapper{}
-.text-data-wrapper .text-data .clear-wrapper .clear{}
-.text-data-wrapper .text-data .clear-wrapper .clear .clear-btn{
-	background-color: #C70039;
-	border-radius: 5px;
-	color: #fff;
-	font-weight: bold;
+.text-data-wrapper .text-data .clear-wrapper .clear{
+	float: right;
+    width: 100%;
 }
+.text-data-wrapper .text-data .clear-wrapper .clear .clear-btn{
+    background-color: #00a89d;
+    color: #fff;
+    font-weight: bold;
+    font-family: "futura-pt";
+    letter-spacing: 2px;
+    padding: 7px 30px;
+    max-height: 37px;
+    width: 100%;
+    transition: background-color 0.2s ease;
+}
+.text-data-wrapper .text-data .clear-wrapper .clear .clear-btn:hover{
+	background-color: #4fd4cb;
+}
+
 
 
 .upload-wrapper{}
@@ -81,7 +123,6 @@
 .upload-wrapper .progress-bar-wrapper .progress-bar{}
 .upload-wrapper .upload-btn-wrapper{}
 .upload-wrapper .upload-btn-wrapper .uploadBtn{
-	border-radius: 5px;
 	color: #fff;
 	font-weight: bold;
 }
@@ -96,7 +137,7 @@
 	font-size: 16px;
 }
 .status-wrapper .status-good{
-	color: green;
+	color: #00a89d;
 }
 .status-wrapper .status-bad{
 	color: red;
