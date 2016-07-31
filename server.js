@@ -1,7 +1,9 @@
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
+var bodyParser = require('body-parser')
 
+app.use(bodyParser.json());
 // Add our fonts_actions, to save and load fonts, pass in the current root dir:
 var font_actions = require('./filesys/font_actions.js')(__dirname);
 // Add our routes for the api, pass in the current app, font_actions and the current root dir:

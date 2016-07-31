@@ -3,6 +3,9 @@ $(document).ready(function(){
 	var realUploadBtn = $("[data-td-real-upload]");
 	var font_type = $("[data-td-font-type]");
 	var font_css = $("[data-td-font-css]");
+	var font_select = $("[data-td-font-type]");
+	var remove_font = $('[data-td-font-added-type]');
+
 	var good_status = $("[data-td-status-good]");
 	var bad_status = $("[data-td-status-bad]");
 	var status_wrapper = $("[data-sv-status-wrapper]");
@@ -75,7 +78,7 @@ $(document).ready(function(){
 				}
 				// If no error, then load the fonts:
 				else{
-					setFonts(data.fonts);
+					setFonts(data);
 					setStatus('good', data.status);
 				}
 			},
@@ -87,11 +90,17 @@ $(document).ready(function(){
 	}
 
 	//  Helper function to load the fonts into the dropdown:
-    function setFonts(fonts){
-    	$("[data-td-font-type]").html("");
-    	for(var i = 0; i < fonts.length; i++){
-    		$("[data-td-font-type]").append(
-    			$("<option value='" + fonts[i] + "'>"+ fonts[i] +"</option>")
+    function setFonts(data){
+    	font_select.html("");
+    	for(var i = 0; i < data.fonts.length; i++){
+    		font_select.append(
+    			$("<option value='" + data.fonts[i] + "'>"+ data.fonts[i] +"</option>")
+    		)
+    	}
+    	remove_font.html("");
+    	for(var i = 0; i < data.new_fonts.length; i++){
+    		remove_font.append(
+    			$("<option value='" + data.new_fonts[i] + "'>"+ data.new_fonts[i] +"</option>")
     		)
     	}
     	// refreshes our css file with the new font families, so we don't have to page reload:
@@ -121,6 +130,41 @@ $(document).ready(function(){
 		good_status.html("");
 		bad_status.html("");
 	}
+
+
+	$("[data-td-remove-btn]").on("click", function(){
+		removeFonts();		
+	})
+
+	function removeFonts(){
+		var fontName = remove_font.val();
+	    //  Calls the server to remove the file:
+	    $.ajax({
+			url: '/remove',
+			type: 'POST',
+			data: JSON.stringify({fontName: fontName}),
+			contentType: "application/json",
+			success: function(data){
+				// re-enable the button to upload another file:
+				console.log(data);
+				// Check if there was an error with the upload:
+				if(data.error){
+					setStatus('bad', data.status)
+				}
+				else{
+					// If no error, recalls the getFonts method to load the new font:
+					// This could also be done locally since we have the file, but this is a quick-work around
+			  		getFonts();
+				}
+			},
+			error: function(err){
+				uploadBtn.prop("disabled", false);
+				console.log(err);
+			}
+	    });
+	}
+
+
 
 
 })

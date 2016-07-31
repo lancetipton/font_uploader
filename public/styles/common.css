@@ -26,6 +26,10 @@ h1,h2,h3,h4,h5,h6{
 	 line-height: 28px;
 	}
 
+body{
+	background: transparent;
+}
+
 .content-section{}
 .content-section .content-wrapper{}
 .content-section .content-wrapper .content{}
@@ -53,7 +57,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .content-section .content-wrapper .content .one-column .main h4{
-    color: #d6d6d6;
+    color: #111;
 	border-bottom: 1px solid #00a89d;
     padding-bottom: 5px;
 }
@@ -62,7 +66,7 @@ h1,h2,h3,h4,h5,h6{
 
 }
 .text-settings-wrapper .text-settings{}
-.text-settings-wrapper .text-settings .header {
+.main .header {
     margin-bottom: 10px;
 }
 .text-settings-wrapper .text-settings .header .title{
@@ -73,6 +77,12 @@ h1,h2,h3,h4,h5,h6{
 .text-settings-wrapper .text-settings .font-type-wrapper .font-type{}
 .text-settings-wrapper .text-settings .font-size-wrapper{}
 .text-settings-wrapper .text-settings .font-size-wrapper .font-size{}
+
+
+.text-settings-wrapper .text-settings .font-color-wrapper{
+    margin-top: 20px;
+}
+
 .text-data-wrapper{}
 .text-data-wrapper .text-data{}
 .text-data-wrapper .text-data .header{
@@ -99,7 +109,7 @@ h1,h2,h3,h4,h5,h6{
 	float: right;
     width: 100%;
 }
-.text-data-wrapper .text-data .clear-wrapper .clear .clear-btn{
+button{
     background-color: #00a89d;
     color: #fff;
     font-weight: bold;
@@ -148,4 +158,10 @@ h1,h2,h3,h4,h5,h6{
 	.text-settings-wrapper .text-settings select{
 		margin-bottom: 15px;
 	}
+
+    .text-settings-wrapper .text-settings .font-color-wrapper{
+        margin-top: 0px;
+    }
+
+
 }

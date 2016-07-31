@@ -4,6 +4,7 @@ $(document).ready(function(){
 	var text_display = $("[data-td-text-display]");
 	var font_type = $("[data-td-font-type]");
 	var font_size = $("[data-td-font-size]");
+	var font_color = $("[data-sv-font-color]");
 	var clear_btn = $("[data-td-clear-btn]");
 
 	//  Clears the Fonts input:
@@ -17,6 +18,13 @@ $(document).ready(function(){
 		var text = $(this).val();
 		text_display.html(text);
 	})
+
+
+	font_color.on("change keydown paste input", function(){
+		var color = $(this).val();
+		text_display.css("color", "#" + color);
+	})
+
 
 	//  Changes the font size to what is selected
 	font_size.on("change keydown paste input", function() {

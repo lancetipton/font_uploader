@@ -95,7 +95,7 @@ module.exports = function(root) {
                 if(saveCss){
                     // If we can use this font file, save the font family into our css:
                     // template to save a font family:
-                    var cssTemplate = "@font-face { \n  font-family: '" + fontName + "';\n  src: url('/public/fonts/" + file.name +"') format('" + ext + "');\n}\n"
+                    var cssTemplate = "@font-face { \n  font-family: '" + fontName + "';\n  src: url('/public/fonts/" + file.name +"') format('" + ext + "');\n}\n/* TD-FontBreak */\n"
                     // Add the new font family to the css file:
                     fs.appendFile(root + "/public/fonts/fonts.css", cssTemplate, function(err){
                         if(err){
@@ -124,7 +124,7 @@ module.exports = function(root) {
     }
 
     // Works the same as the saveCSS function, only diff is it has a special split (- TD-FontBreak) to seperate the fonts:
-    function saveFontList(){
+    function saveFontList(newFont){
         // Get the fiel path:
         var path = filepath.create(root + "/public/fonts/font_list.txt");
         //  check that it exists:
@@ -174,15 +174,21 @@ module.exports = function(root) {
                 if(added_fonts.exists()){
                     added_fonts.read().then(function(data){
                         // add the fonts to our font_string:
-                        fonts_string = fonts_string + "//- TD-FontBreak" + data.replace(/(?:\r\n|\r|\n)/g, '');
+                        new_fonts_string = "//- TD-FontBreak" + data.replace(/(?:\r\n|\r|\n)/g, '');
+                        fonts_string += new_fonts_string;
+
                         // Break the fonts on the special split text:
                         fonts = fonts_string.split("//- TD-FontBreak");
+                        new_fonts = new_fonts_string .split("//- TD-FontBreak");
+
                         // Filter out any empty string from our array of fonts:
                         fonts = fonts.filter(Boolean);
+                        new_fonts = new_fonts.filter(Boolean);
+
                         if(typeof cb === "function"){
                             if(fonts.length > 0){
                                 // return to the client all the loaded fonts:
-                                cb(null, {fonts: fonts, status: "Fonts have been loaded!"});
+                                cb(null, {fonts: fonts, new_fonts: new_fonts, status: "Fonts have been loaded!"});
                             }
                             else{
                                 // If there was an error, let the client know about it:
@@ -193,6 +199,96 @@ module.exports = function(root) {
                 }
             })
         }
+    }
+
+    this.removeFont = function(_req, cb){
+        var rFont = _req.body.fontName;
+        removeFromList(rFont, cb);
+    }
+
+    function removeFromList(rFont, cb){
+        var newList = '';
+        // Get the fiel path:
+        var path = filepath.create(root + "/public/fonts/font_list.txt");
+        //  check that it exists:
+        if(path.exists()){
+            // read in the file:
+            path.read().then(function(data){
+                var fontList = data.split("//- TD-FontBreak")
+                for(var i = 0; i < fontList.length; i++){
+                    fontList[i] = fontList[i].replace(/(?:\r\n|\r|\n)/g, '');
+                    if(rFont  !== fontList[i] && fontList[i] !== ""){
+                        newList += fontList[i] + "\n" + "//- TD-FontBreak\n";
+                    }
+                }
+
+                fs.writeFile(path.toString(), newList, function(err) {
+                    if(err) {
+                        cb(err);
+                    }
+                    else{
+                        removeCss(rFont, cb);
+                    }
+                }); 
+
+            })
+        }
+    }
+
+    function removeCss(rFont, cb){
+        // Load the path of our css file:
+        var path = filepath.create(root + "/public/fonts/fonts.css");
+        var newList = "";
+        var fileName = "";
+        // Check if the path exists:
+        if(path.exists()){
+            path.read()
+            .then(function(data){            
+                var fontList = data.split("/* TD-FontBreak */")
+                for(var i = 0; i < fontList.length; i++){
+                    if(fontList[i].indexOf(rFont) > -1){
+                        fileName = fontList[i].split("src: url('/public/fonts/")[1].split("') format")[0]
+                    }
+                    if(fontList[i].indexOf(rFont) === -1 && fontList[i] !== "\n"){
+                        newList += fontList[i] + "\n" + "/* TD-FontBreak */\n";
+                    }
+                }
+
+            })
+            .then(function(){
+                fs.writeFile(path.toString(), newList, function(err) {
+                    if(err) {
+                        cb(err);
+                    }
+                    else{
+                        removeFile(fileName, cb);
+                    }
+                }); 
+            })
+        }
+    }
+
+    function removeFile(fileName, cb){
+        var file_path = path.join(root, '/public/fonts/', fileName);
+        // Check if the font already exists:
+        fs.stat(file_path, function(err, stat) {
+            if(err == null) {
+                fs.unlink(file_path, function(err){
+                    if(err) {
+                        cb(err);
+                    }
+                    else{
+                       cb(null, {status: "Font was removed!"});
+                    }
+                });  
+            } 
+            else if(err.code == 'ENOENT') {
+                cb(null, {status: "Font was removed!"});
+            } 
+            else {
+                cb({error: true, status: "Could not remove font, please try again!"})
+            }
+        });
     }
 
     return this;

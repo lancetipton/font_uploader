@@ -10,6 +10,7 @@
     "filepath": "^1.1.0",
     "formidable": "^1.0.17",
     "jquery": "latest",
+    "jsonfile": "^2.3.1",
     "node-css": "^0.1.0",
     "nodemon": "^1.9.2",
     "q": "^1.4.1"

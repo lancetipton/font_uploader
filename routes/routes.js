@@ -6,8 +6,8 @@ module.exports = function(app, font_actions, __dirname) {
 	  res.sendFile(__dirname + '/views/index.html');
 	});
 
-	app.get('/upload', function(req, res){
-	  res.sendFile(__dirname + '/views/upload.html');
+	app.get('/uploader', function(req, res){
+	  res.sendFile(__dirname + '/views/uploader.html');
 	});
 
 	// Route to get all the fonts loaded on the server:
@@ -35,6 +35,24 @@ module.exports = function(app, font_actions, __dirname) {
 
 		//  Call the saveFont function to save our font:
 		font_actions.saveFont(req, function(err, data){
+			if(err !== null){
+				// Log and return an error, if there was one:
+				console.log(err);
+	  			res.end(JSON.stringify(err));
+			}
+			else{
+				// return the font status:
+				res.end(JSON.stringify(data));
+			}
+		});
+	});
+
+	app.post('/remove', function(req, res){
+		// Set the headers to use json:
+		res.setHeader('Content-Type', 'application/json');
+
+		//  Call the removeFont function to save our font:
+		font_actions.removeFont(req, function(err, data){
 			if(err !== null){
 				// Log and return an error, if there was one:
 				console.log(err);
