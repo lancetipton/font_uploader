@@ -81,7 +81,16 @@ body{
 
 .text-settings-wrapper .text-settings .font-color-wrapper{
     margin-top: 20px;
+    position: relative;
 }
+.text-settings-wrapper .text-settings .font-color-wrapper .pick-color{
+    position: absolute;
+    right: 30px;
+    z-index: 2;
+    top: 6px;
+    font-family: "Titillium Web";
+}
+
 
 .text-data-wrapper{}
 .text-data-wrapper .text-data{}
@@ -102,7 +111,6 @@ body{
 .text-data-wrapper .text-data .text-display{
 	min-height: 20px;
     font-size: 50px;
-	/*border-bottom: 1px solid #581845;*/
 }
 .text-data-wrapper .text-data .clear-wrapper{}
 .text-data-wrapper .text-data .clear-wrapper .clear{
