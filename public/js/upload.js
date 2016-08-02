@@ -9,6 +9,7 @@ $(document).ready(function(){
 	var good_status = $("[data-td-status-good]");
 	var bad_status = $("[data-td-status-bad]");
 	var status_wrapper = $("[data-sv-status-wrapper]");
+	var removeBtn = $("[data-td-remove-btn]");
 
 	// Hide the status on load:
 	status_wrapper.hide();
@@ -18,7 +19,15 @@ $(document).ready(function(){
 	uploadBtn.on('click', function (){
 	    realUploadBtn.click();
 	    $(this).prop("disabled", true);
+	    reEnabler();
 	});
+
+	function reEnabler(){
+		setTimeout(function(){
+			uploadBtn.prop("disabled", false);
+			removeBtn.prop("disabled", false);	
+		}, 4000);
+	}
 
 	// Gets the file that was uploaded, and sends it to the server:
 	realUploadBtn.on('change', function(){
@@ -132,8 +141,10 @@ $(document).ready(function(){
 	}
 
 
-	$("[data-td-remove-btn]").on("click", function(){
-		removeFonts();		
+	removeBtn.on("click", function(){
+		removeFonts();
+		removeBtn.prop("disabled", true);
+		reEnabler();		
 	})
 
 	function removeFonts(){
@@ -146,6 +157,7 @@ $(document).ready(function(){
 			contentType: "application/json",
 			success: function(data){
 				// re-enable the button to upload another file:
+				removeBtn.prop("disabled", false);		
 				console.log(data);
 				// Check if there was an error with the upload:
 				if(data.error){
@@ -158,7 +170,7 @@ $(document).ready(function(){
 				}
 			},
 			error: function(err){
-				uploadBtn.prop("disabled", false);
+				removeBtn.prop("disabled", false);	
 				console.log(err);
 			}
 	    });
