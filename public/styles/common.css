@@ -198,5 +198,8 @@ button{
         margin-top: 0px;
     }
 
-
+    .text-data-wrapper .text-data .text-display-wrapper {
+        margin-top: 40px;
+        padding: 0px 20px;
+    }
 }
