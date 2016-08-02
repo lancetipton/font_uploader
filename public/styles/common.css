@@ -18,6 +18,21 @@
     src: url('/public/fonts/prox-nova-alt-bold.otf');
 }
 
+@font-face {
+    font-family: 'Comic Sans MS';
+    src: url('/public/fonts/comic.ttf');
+}
+@font-face {
+    font-family: 'Impact';
+    src: url('/public/fonts/impact.ttf');
+}
+@font-face {
+    font-family: 'Century Gothic';
+    src: url('/public/fonts/century-gothic.ttf');
+}
+
+
+
 h1,h2,h3,h4,h5,h6{
 	 font-family: "Titillium Web";
 	 font-weight: 600;
@@ -111,6 +126,7 @@ body{
 .text-data-wrapper .text-data .text-display{
 	min-height: 20px;
     font-size: 50px;
+    font-family: "Comic Sans MS";
 }
 .text-data-wrapper .text-data .clear-wrapper{}
 .text-data-wrapper .text-data .clear-wrapper .clear{
@@ -162,7 +178,19 @@ button{
 }
 
 
-@media only screen and (max-width: 40.063em) { 
+@media only screen and (max-width: 40.063em) {
+    .text-data-wrapper .text-data,
+    .text-settings-wrapper .text-settings,
+    .content-section .content-wrapper .content .one-column{
+        padding: 0px;
+    }
+
+    .content-section .content-wrapper .content .one-column .main{
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+
 	.text-settings-wrapper .text-settings select{
 		margin-bottom: 15px;
 	}
