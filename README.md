@@ -7,7 +7,7 @@ I was browsing Reddit, and saw someone asking for this. So I figured it would no
 ### What it Does:
 Upload fonts, and test them out. Saves the font to the server and updates the dom with the new font to test out. Auto generates new css and reloads it without page refresh.
 
-### See if in Action:
+### See it in Action:
 https://font-test.herokuapp.com/
 
 
